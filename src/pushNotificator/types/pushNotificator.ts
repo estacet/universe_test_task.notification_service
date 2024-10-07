@@ -1,5 +1,5 @@
 export interface PushNotificator {
-    send(body: any);
+  send(body: any);
 }
 
 export const PushNotificator = Symbol('PushNotificator');

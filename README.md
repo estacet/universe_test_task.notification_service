@@ -2,5 +2,6 @@
 
 ## Setup
 
-1. `npm i`
-2. `npm run start`
+1. `cp .env.dist .env`
+2. `npm i`
+3. `npm run start`
