@@ -4,7 +4,6 @@ import { SqsModule } from '@ssut/nestjs-sqs';
 import { SQSClient } from '@aws-sdk/client-sqs';
 import { Credentials } from 'aws-sdk';
 import { UserEventsHandler } from './userEvents.handler';
-import { PushNotificator } from '../pushNotificator/types';
 import { PushNotificatorModule } from '../pushNotificator/pushNotificator.module';
 
 @Module({

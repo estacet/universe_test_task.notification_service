@@ -1,16 +1,23 @@
 import { Message } from '@aws-sdk/client-sqs';
 import { Inject, Injectable } from '@nestjs/common';
-import { SqsConsumerEventHandler, SqsMessageHandler } from '@ssut/nestjs-sqs';
+import { SqsMessageHandler } from '@ssut/nestjs-sqs';
 import { PushNotificator } from '../pushNotificator/types/';
+import { NotificationBodyDto } from './dto';
 
 @Injectable()
 export class UserEventsHandler {
   constructor(
     @Inject(PushNotificator) private readonly pushNotificator: PushNotificator,
   ) {}
+
   @SqsMessageHandler('my_test_queue', false)
   public async handleMessage(message: Message) {
-    console.log('++++++++++++++++++', message);
-    this.pushNotificator.send(message.Body);
+    const messageBody = JSON.parse(message.Body);
+    const notificationBody: NotificationBodyDto = {
+      deviceId: messageBody.data.deviceId,
+      text: `Welcome ${messageBody.data.name}! You have been successfully registered.`,
+    };
+
+    this.pushNotificator.send(notificationBody);
   }
 }
