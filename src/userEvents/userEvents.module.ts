@@ -15,6 +15,7 @@ import { PushNotificatorModule } from '../pushNotificator/pushNotificator.module
             {
               name: configService.get('QUEUE_NAME'),
               queueUrl: configService.get('AWS_SQS_QUEUE_URL'),
+              messageAttributeNames: ['All'],
               sqs: new SQSClient({
                 region: configService.get('AWS_REGION'),
                 endpoint: configService.get('AWS_SQS_URL'),
